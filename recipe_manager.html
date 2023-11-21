@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Final Project</title>
+
+    <script src = "recipe_info.js"></script>
+
+    <style>
+        img {
+            width: 250px;
+            height: 250px;
+        }
+        
+body {
+  text-align: center;
+  background-color: rgb(226, 193, 121);
+}
+
+header {
+  background-color: #ff7b00;
+  padding: 3%;
+}
+
+header h1{
+  color: white;
+  font-family: sans-serif;
+  font-size: 300%;
+  font-style: italic;
+}
+
+header select {
+  width: 50%;
+  height: 40px;
+  font-size: 100%;
+}
+
+form {
+  padding: 1%;
+  margin: 5%;
+  margin-right: 25%;
+  margin-left: 25%;
+  width: 50%;
+  background-color: #a0beda;
+  border-radius: 20px;
+  border: 2px solid black;
+
+}
+
+form input[type=text] {
+  width: 20%;
+}
+
+form input[type=number] {
+   width: 5%;
+}
+
+form input {
+   margin-bottom: 2%;
+}
+
+canvas {
+  width: 20%;
+}
+
+.accordion {
+  background-color: #ff1e00;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  cursor: pointer;
+  padding: 18px;
+  margin-bottom: 1px;
+  width: 100%;
+  text-align: center;
+  font-size: xx-large;
+  transition: 0.12s;
+}
+
+
+@media only screen and (max-width: 750px) {
+  body {
+    font-size: 100%;
+  }
+
+  .accordian {
+    font-size: 200%;
+  }
+
+  #addRecipeAccordion {
+    font-size: 200%;
+  }
+
+  #instructionsChili {
+    padding-left: 10%;
+  }
+
+  #instructionsMAC {
+    padding-left: 10%;
+  }
+
+  #instructionsCookies {
+    padding-left: 10%;
+  }
+
+  form {
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+  }
+
+  form input[type=text] {
+    width: 55%;
+  }
+
+  form input[type=number] {
+     width: 15%;
+  }
+
+
+  form input {
+     margin-bottom: 5%;
+  }
+
+  header select {
+    width: 100%;
+  }
+
+  button {
+    padding: 6px 15px;
+  }
+
+  img {
+    width: 50%;
+  }
+
+  header select {
+    width: 100%;
+  }}
+    </style>
+
+
+  </head>
+  <body onload = "readyJavaScript();">
+    <header>
+      <h1>Select Recipe!</h1>
+
+      <select name = "chooseARecipe" id = "chooseARecipe">
+        <option value = "none" selected disabled hidden>Select Recipe!</option>
+        <script>
+          for(i=0; i<recipeOptions.length; i++)
+          {
+            document.write("<option value = " + recipeOptionValues[i] + ">" + recipeOptions[i] + "</option>" );
+          }
+          
+        </script>
+      </select>
+    </header>
+
+    <h2 class = "recipeName"></h2>
+
+    <div class = "allAccordions">
+    <button class="accordion" onClick = "infoFunctionChili();">Info</button>
+    <div class="panel">
+      <p id = "infoChili"></p>
+      <p id = "infoName"><canvas id ="can"></canvas></p>
+      <p id = "infoNew"></p>
+
+    </div>
+
+    <button class="accordion" onClick = "ingredientsFunctionChili(); ingredientsFunctionNew()">Ingredients</button>
+    <div class="panel">
+      <div class = "servingsButtons">
+        <p></p>
+        <span>Servings: </span>
+        <button class = "half" onClick = "halfServingsChangeChili(); halfServingsChangeNew();">Half</button>
+        <button class = "normal" onClick = "ingredientsFunctionChili(); addIngredientsContent();">Normal</button>
+        <button class = "double"onClick = "doubleServingsChangeChili(); doubleServingsChangeNew();">Double</button>
+      </div>
+      <p id = "ingredientsChili"></p>
+      <span id = "containerNewIngredients">
+        <p id = "ingredientsNew"></p>
+      </span>
+    </div>
+
+    <button class="accordion" onClick = "instructionsFunctionChili();">Instructions</button>
+    <div class="panel">
+      <p id = "instructionsChili"></p>
+      <span id="containerNewInstructions">
+        <p id= "instructionsNew"></p>
+      </span>
+    </div>
+    <br>
+    </div>
+    <br>
+
+  <button id ="addRecipeAccordion" class="accordion"></button>
+  <div id = "addRecipePanel" class="panel">
+
+      <form name ="recipeForm" class = "addRecipeForm" onclick="upload();" onSubmit = "validateForm(); infoFunctionNew(); addInfoContent(); ingredientsFunctionNew(); addIngredientsContent(); instructionsFunctionNew(); addInstructionsContent(); return false">
+        <h1>My Recipe</h1>
+
+        <label for="recipeName">Name Of Recipe:</label>
+        <input type="text" id="recipeName" name="recipeName"><br>
+
+        <label for="recipeImage">Upload Image:</label>
+        <input type="file" accept="image/*" name="recipeImage" id="recipeImage" onchange=upload()><br>
+
+        <label for="servings">Servings It Makes:</label>
+        <input type="number" id="servings" name="servings"><br>
+
+        <label for="prepTime">Prep Time:</label>
+        <input type="number" id="prepTime" name="prepTime">
+
+        <div>
+          <input type="radio" id="prepTimeMinutes" name="prepTimeMeasurement" value="minutes">
+          <label for="prepTimeMinutes">Minutes</label>
+        </div>
+
+        <div>
+          <input type="radio" id="prepTimeHours" name="prepTimeMeasurement" value="hours">
+          <label for="prepTimeHours">Hours</label>
+        </div>
+        <br>
+
+        <label for="cookTime">Cook Time:</label>
+        <input type="number" id="cookTime" name="cookTime">
+        <div>
+          <input type="radio" id="cookTimeMinutes" name="cookTimeMeasurement" value="minutes">
+          <label for="cookTimeMinutes">Minutes</label>
+        </div>
+
+        <div>
+          <input type="radio" id="cookTimeHours" name="cookTimeMeasurement" value="hours">
+          <label for="cookTimeHours">Hours</label>
+        </div>
+        <br>
+
+        <label for="difficulty">Difficulty:</label>
+        <select name="difficulty" id="difficulty">
+          <option value="easy">I'm Too Young to Die</option>
+          <option value="average">Ultra-Violence</option>
+          <option value="difficult">Nightmare!</option>
+        </select>
+        <br><br>
+
+        <label for="ingredientNumber">Number of ingredients:</label> <br>
+        <input type="number" id="ingredientNumber" name="ingredientNumber" value=""><br>
+
+        <a href="#" id="ingredients" onclick="addFieldsIngredients()">Insert Ingredients</a>
+        <div id="containerIngredients"></div><br>
+
+        <label for="instructionsNumber">Number of instructions:</label> <br>
+        <input type="number" id="instructionsNumber" name="instructionsNumber" value=""><br>
+
+        <a href="#" id="instructions" onclick="addFieldsInstructions()">Insert Instructions</a>
+        <div id="containerInstructions"></div>
+
+        <br>
+
+
+        <input type = "reset" value = "Reset"></input>
+        <input type="submit" value="Add Recipe">
+
+
+      </form>
+    </div>
+
+  </body>
+</html>
