@@ -198,41 +198,41 @@ canvas {
   <div id = "addRecipePanel" class="panel">
 
       <form name ="recipeForm" class = "addRecipeForm" onclick="upload();" onSubmit = "validateForm(); infoFunctionNew(); addInfoContent(); ingredientsFunctionNew(); addIngredientsContent(); instructionsFunctionNew(); addInstructionsContent(); return false">
-        <h1>My Recipe</h1>
+        <h1>My Own New Recipe</h1>
 
-        <label for="recipeName">Name Of Recipe:</label>
+        <label for="recipeName">Name Of New Recipe:</label>
         <input type="text" id="recipeName" name="recipeName"><br>
 
-        <label for="recipeImage">Upload Image:</label>
+        <label for="recipeImage">Upload Image File:</label>
         <input type="file" accept="image/*" name="recipeImage" id="recipeImage" onchange=upload()><br>
 
-        <label for="servings">Servings It Makes:</label>
+        <label for="servings">Servings it will Make:</label>
         <input type="number" id="servings" name="servings"><br>
 
-        <label for="prepTime">Prep Time:</label>
+        <label for="prepTime">Amount of Prep Time:</label>
         <input type="number" id="prepTime" name="prepTime">
 
         <div>
           <input type="radio" id="prepTimeMinutes" name="prepTimeMeasurement" value="minutes">
-          <label for="prepTimeMinutes">Minutes</label>
+          <label for="prepTimeMinutes">Mins</label>
         </div>
 
         <div>
           <input type="radio" id="prepTimeHours" name="prepTimeMeasurement" value="hours">
-          <label for="prepTimeHours">Hours</label>
+          <label for="prepTimeHours">Hrs</label>
         </div>
         <br>
 
-        <label for="cookTime">Cook Time:</label>
+        <label for="cookTime">Cooking Time:</label>
         <input type="number" id="cookTime" name="cookTime">
         <div>
           <input type="radio" id="cookTimeMinutes" name="cookTimeMeasurement" value="minutes">
-          <label for="cookTimeMinutes">Minutes</label>
+          <label for="cookTimeMinutes">Mins</label>
         </div>
 
         <div>
           <input type="radio" id="cookTimeHours" name="cookTimeMeasurement" value="hours">
-          <label for="cookTimeHours">Hours</label>
+          <label for="cookTimeHours">Hrs</label>
         </div>
         <br>
 
@@ -244,13 +244,13 @@ canvas {
         </select>
         <br><br>
 
-        <label for="ingredientNumber">Number of ingredients:</label> <br>
+        <label for="ingredientNumber">Ingredients:</label> <br>
         <input type="number" id="ingredientNumber" name="ingredientNumber" value=""><br>
 
         <a href="#" id="ingredients" onclick="addFieldsIngredients()">Insert Ingredients</a>
         <div id="containerIngredients"></div><br>
 
-        <label for="instructionsNumber">Number of instructions:</label> <br>
+        <label for="instructionsNumber">Instructions:</label> <br>
         <input type="number" id="instructionsNumber" name="instructionsNumber" value=""><br>
 
         <a href="#" id="instructions" onclick="addFieldsInstructions()">Insert Instructions</a>
