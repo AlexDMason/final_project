@@ -81,6 +81,120 @@ body {
     text-align: center;
     background-color: aliceblue;
 }
+
+        .eventBox {
+            border:thin solid black;
+            margin-bottom:20px;
+        }
+
+        .boldEvent {
+            font-weight:bold;
+        }
+
+        .flex-container {
+            display: flex;
+            background-color:coral;
+            }
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+}
+
+body {
+  text-align: center;
+  background-color: rgb(226, 193, 121);
+}
+
+header {
+  background-color: #ff7b00;
+  padding: 3%;
+}
+
+header h1{
+  color: white;
+  font-family: sans-serif;
+  font-size: 300%;
+  font-style: italic;
+}
+
+header select {
+  width: 50%;
+  height: 40px;
+  font-size: 100%;
+}
+
+form {
+  padding: 1%;
+  margin: 5%;
+  margin-right: 25%;
+  margin-left: 25%;
+  width: 50%;
+  background-color: #a0beda;
+  border-radius: 20px;
+  border: 2px solid black;
+
+}
+
+form input[type=text] {
+  width: 20%;
+}
+
+form input[type=number] {
+   width: 5%;
+}
+
+form input {
+   margin-bottom: 2%;
+}
+
+canvas {
+  width: 20%;
+}
+
+@media only screen and (max-width: 750px) {
+  body {
+    font-size: 150%;
+    font-weight: bold;
+  }
+
+  form {
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+  }
+
+  form input[type=text] {
+    width: 55%;
+  }
+
+  form input[type=number] {
+     width: 15%;
+  }
+
+
+  form input {
+     margin-bottom: 5%;
+  }
+
+  header select {
+    width: 100%;
+  }
+
+  button {
+    padding: 6px 15px;
+  }
+
+  img {
+    width: 50%;
+  }
+
+  header select {
+    width: 100%;
+  }}
+    
 </style>
 
 </head>
@@ -104,8 +218,8 @@ else{
 <label for="header">Header: </label>
 <input type="text" name="header" id="header">
 <br></br>
-<label for="image">Image: </label>
-<input type="file" name="image" id="image" accept="image/*">
+<label for="image">Amount of Time: </label>
+<input type="text" name="image" id="image" accept="image/*">
 <br></br>
 <label for="ingredients">Ingredients: </label>
 <input type="text" name="ingredients" id="ingredients">

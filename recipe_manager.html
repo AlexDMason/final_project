@@ -65,6 +65,13 @@ canvas {
   width: 20%;
 }
 
+.panel {
+  padding: 0 18px;
+  max-height: 5;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
 .accordion {
   background-color: #ff1e00;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -74,9 +81,8 @@ canvas {
   width: 100%;
   text-align: center;
   font-size: xx-large;
-  transition: 0.12s;
+  transition: 0.4s;
 }
-
 
 @media only screen and (max-width: 750px) {
   body {
@@ -142,6 +148,79 @@ canvas {
 
   </head>
   <body onload = "readyJavaScript();">
+
+    <button id ="addRecipeAccordion" class="accordion"></button>
+    <div id = "addRecipePanel" class="panel">
+  
+        <form name ="recipeForm" class = "addRecipeForm" onclick="upload();" onSubmit = "validateForm(); infoFunctionNew(); addInfoContent(); ingredientsFunctionNew(); addIngredientsContent(); instructionsFunctionNew(); addInstructionsContent(); return false">
+          <h1>My Own New Recipe</h1>
+  
+          <label for="recipeName">Name Of New Recipe:</label>
+          <input type="text" id="recipeName" name="recipeName"><br>
+  
+          <label style="display: none;" for="recipeImage">Upload Image File:</label>
+          <input style="display: none;" type="file" accept="image/*" name="recipeImage" id="recipeImage" onchange=upload()><br>
+  
+          <label for="servings">Servings it will Make:</label>
+          <input type="number" id="servings" name="servings"><br>
+  
+          <label for="prepTime">Amount of Prep Time:</label>
+          <input type="number" id="prepTime" name="prepTime">
+  
+          <div>
+            <input type="radio" id="prepTimeMinutes" name="prepTimeMeasurement" value="minutes">
+            <label for="prepTimeMinutes">Mins</label>
+          </div>
+  
+          <div>
+            <input type="radio" id="prepTimeHours" name="prepTimeMeasurement" value="hours">
+            <label for="prepTimeHours">Hrs</label>
+          </div>
+          <br>
+  
+          <label for="cookTime">Cooking Time:</label>
+          <input type="number" id="cookTime" name="cookTime">
+          <div>
+            <input type="radio" id="cookTimeMinutes" name="cookTimeMeasurement" value="minutes">
+            <label for="cookTimeMinutes">Mins</label>
+          </div>
+  
+          <div>
+            <input type="radio" id="cookTimeHours" name="cookTimeMeasurement" value="hours">
+            <label for="cookTimeHours">Hrs</label>
+          </div>
+          <br>
+  
+          <label for="difficulty">Difficulty:</label>
+          <select name="difficulty" id="difficulty">
+            <option value="easy">I'm Too Young to Die</option>
+            <option value="average">Ultra-Violence</option>
+            <option value="difficult">Nightmare!</option>
+          </select>
+          <br><br>
+  
+          <label for="ingredientNumber">Ingredients:</label> <br>
+          <input type="number" id="ingredientNumber" name="ingredientNumber" value=""><br>
+  
+          <a href="#" id="ingredients" onclick="addFieldsIngredients()">Insert Ingredients</a>
+          <div id="containerIngredients"></div><br>
+  
+          <label for="instructionsNumber">Instructions:</label> <br>
+          <input type="number" id="instructionsNumber" name="instructionsNumber" value=""><br>
+  
+          <a href="#" id="instructions" onclick="addFieldsInstructions()">Insert Instructions</a>
+          <div id="containerInstructions"></div>
+  
+          <br>
+  
+  
+          <input type = "reset" value = "Reset"></input>
+          <input type="submit" value="Add Recipe">
+  
+  
+        </form>
+      </div>
+
     <header>
       <h1>Select Recipe!</h1>
 
@@ -193,78 +272,21 @@ canvas {
     <br>
     </div>
     <br>
-
-  <button id ="addRecipeAccordion" class="accordion"></button>
-  <div id = "addRecipePanel" class="panel">
-
-      <form name ="recipeForm" class = "addRecipeForm" onclick="upload();" onSubmit = "validateForm(); infoFunctionNew(); addInfoContent(); ingredientsFunctionNew(); addIngredientsContent(); instructionsFunctionNew(); addInstructionsContent(); return false">
-        <h1>My Own New Recipe</h1>
-
-        <label for="recipeName">Name Of New Recipe:</label>
-        <input type="text" id="recipeName" name="recipeName"><br>
-
-        <label for="recipeImage">Upload Image File:</label>
-        <input type="file" accept="image/*" name="recipeImage" id="recipeImage" onchange=upload()><br>
-
-        <label for="servings">Servings it will Make:</label>
-        <input type="number" id="servings" name="servings"><br>
-
-        <label for="prepTime">Amount of Prep Time:</label>
-        <input type="number" id="prepTime" name="prepTime">
-
-        <div>
-          <input type="radio" id="prepTimeMinutes" name="prepTimeMeasurement" value="minutes">
-          <label for="prepTimeMinutes">Mins</label>
-        </div>
-
-        <div>
-          <input type="radio" id="prepTimeHours" name="prepTimeMeasurement" value="hours">
-          <label for="prepTimeHours">Hrs</label>
-        </div>
-        <br>
-
-        <label for="cookTime">Cooking Time:</label>
-        <input type="number" id="cookTime" name="cookTime">
-        <div>
-          <input type="radio" id="cookTimeMinutes" name="cookTimeMeasurement" value="minutes">
-          <label for="cookTimeMinutes">Mins</label>
-        </div>
-
-        <div>
-          <input type="radio" id="cookTimeHours" name="cookTimeMeasurement" value="hours">
-          <label for="cookTimeHours">Hrs</label>
-        </div>
-        <br>
-
-        <label for="difficulty">Difficulty:</label>
-        <select name="difficulty" id="difficulty">
-          <option value="easy">I'm Too Young to Die</option>
-          <option value="average">Ultra-Violence</option>
-          <option value="difficult">Nightmare!</option>
-        </select>
-        <br><br>
-
-        <label for="ingredientNumber">Ingredients:</label> <br>
-        <input type="number" id="ingredientNumber" name="ingredientNumber" value=""><br>
-
-        <a href="#" id="ingredients" onclick="addFieldsIngredients()">Insert Ingredients</a>
-        <div id="containerIngredients"></div><br>
-
-        <label for="instructionsNumber">Instructions:</label> <br>
-        <input type="number" id="instructionsNumber" name="instructionsNumber" value=""><br>
-
-        <a href="#" id="instructions" onclick="addFieldsInstructions()">Insert Instructions</a>
-        <div id="containerInstructions"></div>
-
-        <br>
-
-
-        <input type = "reset" value = "Reset"></input>
-        <input type="submit" value="Add Recipe">
-
-
-      </form>
-    </div>
-
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+      
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+      }
+      </script>
   </body>
 </html>

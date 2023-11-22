@@ -145,7 +145,7 @@ canvas {
                 echo "<h3>";
                     echo "Name:  ", $row["header"];
                 echo "</h3>";
-                    echo $row["image"];
+                    echo "<b>Amount of Time:   </b>", $row["image"];
                 echo "</p>";
                 echo  "<b>Ingredients:   </b>", $row["ingredients"];
                 echo "</p>";

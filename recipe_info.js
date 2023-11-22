@@ -1,3 +1,282 @@
+function addFieldsInstructions(){
+  let number = document.getElementById("instructionsNumber").value;
+  let container = document.getElementById("containerInstructions");
+  while (container.hasChildNodes()) {
+      container.removeChild(container.lastChild);
+  }
+  for (i=0;i<number;i++){
+        container.appendChild(document.createTextNode("Instruction " + (i+1)));
+        var input = document.createElement("input");
+        input.type = "text";
+        input.id = "instruction" + (i+1);
+        container.appendChild(input);
+        container.appendChild(document.createElement("br"));
+  }
+
+}
+
+
+
+function validateForm() {
+
+let a = document.forms["recipeForm"]["recipeName"].value;
+let b = document.forms["recipeForm"]["servings"].value;
+let c = document.forms["recipeForm"]["prepTime"].value;
+let d = document.forms["recipeForm"]["prepTimeMeasurement"].value;
+let e = document.forms["recipeForm"]["cookTime"].value;
+let f = document.forms["recipeForm"]["cookTimeMeasurement"].value;
+let g = document.forms["recipeForm"]["ingredientNumber"].value;
+let h = document.forms["recipeForm"]["instructionsNumber"].value;
+
+if (a == "") {
+alert("Recipe name must be filled out");
+location.reload();
+}
+
+
+else if (b == "") {
+alert("Servings must be filled out");
+location.reload();
+}
+
+
+else if (c == "") {
+alert("Prep Time must be filled out");
+location.reload();
+}
+
+
+else if (d == "") {
+alert("Prep Time Measurement must be filled out");
+location.reload();
+}
+
+
+else if (e == "") {
+alert("Cook Time must be filled out");
+location.reload();
+}
+
+
+else if (f == "") {
+alert("Cook Time Measurement must be filled out");
+location.reload();
+
+}
+
+
+else if (g == "") {
+alert("Number of Ingredients must be filled out");
+location.reload();
+
+}
+
+
+else if (h == "") {
+alert("Number of Instructions must be filled out");
+location.reload();
+}
+
+else {
+alert("Recipe Has Been Successfully Added to List!");
+document.body.scrollTop = 0;
+document.documentElement.scrollTop = 0;
+}
+
+}
+
+
+
+
+function infoFunctionNew() {
+
+let recipeName = document.getElementById("recipeName").value;
+localStorage.setItem("recipeName", recipeName);
+
+let finalRecipeName = localStorage.getItem("recipeName");
+
+let recipeServes = document.getElementById("servings").value;
+localStorage.setItem("recipeServes", recipeServes);
+
+let finalRecipeServes = localStorage.getItem("recipeServes");
+
+let prepTimeMeasurement = document.getElementById("prepTime").value;
+localStorage.setItem("recipePrepNum", prepTimeMeasurement);
+
+let finalRecipePrepTimeNumber = localStorage.getItem("recipePrepNum");
+
+let prepTimeMeasure = "";
+if (document.getElementById('prepTimeMinutes').checked) {
+prepTimeMeasure = document.getElementById('prepTimeMinutes').value;
+}
+else if (document.getElementById('prepTimeHours').checked) {
+prepTimeMeasure = document.getElementById('prepTimeHours').value;
+}
+
+localStorage.setItem("recipePrepTimeMeasure", prepTimeMeasure);
+
+let finalRecipePrepTimeMeasure = localStorage.getItem("recipePrepTimeMeasure");
+
+let cookTimeNumber = document.getElementById("cookTime").value;
+localStorage.setItem("recipeCookNum", cookTimeNumber);
+
+let finalRecipeCookTimeNumber = localStorage.getItem("recipeCookNum");
+
+let cookTimeMeasure = "";
+if (document.getElementById('cookTimeMinutes').checked) {
+cookTimeMeasure = document.getElementById('cookTimeMinutes').value;
+}
+else if (document.getElementById('cookTimeHours').checked) {
+cookTimeMeasure = document.getElementById('cookTimeHours').value;
+}
+
+localStorage.setItem("recipeCookTimeMeasure", cookTimeMeasure);
+
+let finalRecipeCookTimeMeasure = localStorage.getItem("recipeCookTimeMeasure");
+
+let selectedDifficulty = document.querySelector('#difficulty option:checked').value;
+localStorage.setItem("difficulty", selectedDifficulty);
+
+let finalRecipeDifficulty = localStorage.getItem("difficulty");
+
+
+
+let newRecipeName = localStorage.getItem("recipeName");
+recipeOptions.push(newRecipeName);
+
+let newRecipe = "newRecipe";
+recipeOptionValues.push(newRecipe);
+
+
+let listOfInfo = {
+recipeName: finalRecipeName,
+recipeServes: finalRecipeServes,
+recipePrepNum: finalRecipePrepTimeNumber,
+recipePrepMeasure: finalRecipePrepTimeMeasure,
+recipeCookNum: finalRecipeCookTimeNumber,
+recipeCookMeasure: finalRecipeCookTimeMeasure,
+recipeDifficulty: finalRecipeDifficulty
+};
+
+localStorage.setItem("New Recipe Info", JSON.stringify(listOfInfo));
+let info = localStorage.getItem("New Recipe Info");
+}
+
+function addInfoContent() {
+let info = localStorage.getItem("New Recipe Info");
+let parsedInfo = JSON.parse(info);
+
+
+let selectRecipe = document.getElementById("chooseARecipe");
+let addRecipe = document.createElement("option");
+addRecipe.text = parsedInfo.recipeName;
+selectRecipe.add(addRecipe);
+
+let infoList = "";
+infoList += "<h1>" + parsedInfo.recipeName + "</h1>" + "<p>Serves: " + parsedInfo.recipeServes + "</p>" + "<p> Preparation Time: " + parsedInfo.recipePrepNum + " " + parsedInfo.recipePrepMeasure + "</p>" + "<p>Cook Time: " + parsedInfo.recipeCookNum + " " + parsedInfo.recipeCookMeasure + "</p>" + "<p>Difficulty: " + parsedInfo.recipeDifficulty + "</p>" + "<br><br>";
+
+
+document.querySelector("#infoNew").innerHTML = infoList;
+
+
+}
+
+
+function ingredientsFunctionNew() {
+
+let numberOfIngredients = document.getElementById("ingredientNumber").value;
+
+let listOfIngredients = [];
+
+for (i=0; i<parseInt(numberOfIngredients); i++) {
+let ingredientName = document.getElementById("ingredientType" + (i+1)).value;
+let ingredientUnitOfMeasure = document.getElementById("ingredientMeasure" + (i+1)).value;
+let ingredientQuantity = document.getElementById("ingredientAmount" + (i+1)).value;
+
+let ingredient = {
+ingredientName: ingredientName,
+ingredientUnitOfMeasure: ingredientUnitOfMeasure,
+ingredientQuantity: ingredientQuantity
+};
+listOfIngredients.push(ingredient);
+}
+
+localStorage.setItem("List Of Ingredients", JSON.stringify(listOfIngredients));
+
+
+}
+
+function addIngredientsContent() {
+let ingredients = localStorage.getItem("List Of Ingredients");
+let parsedIngredients = JSON.parse(ingredients);
+
+let i;
+let ingredientList = "";
+for (i=0; i<parseInt(parsedIngredients.length); i++) {
+ingredientList += (parsedIngredients[i].ingredientQuantity) + " " + parsedIngredients[i].ingredientUnitOfMeasure + " " + parsedIngredients[i].ingredientName + "<br>";
+}
+document.querySelector("#ingredientsNew").innerHTML = ingredientList;
+
+}
+
+function instructionsFunctionNew() {
+let numberOfInstructions = document.getElementById("instructionsNumber").value;
+
+let listOfInstructions = [];
+
+for (i=0; i<parseInt(numberOfInstructions); i++) {
+let instruction = document.getElementById("instruction" + (i+1)).value;
+
+let instructions = {
+step: instruction
+};
+listOfInstructions.push(instructions);
+}
+
+localStorage.setItem("List Of Instructions", JSON.stringify(listOfInstructions));
+
+
+}
+
+function addInstructionsContent() {
+let instructions = localStorage.getItem("List Of Instructions");
+let parsedInstructions = JSON.parse(instructions);
+
+let i;
+let instructionList = "";
+for (i=0; i<parseInt(parsedInstructions.length); i++) {
+instructionList += (i+1) + ". " + parsedInstructions[i].step + "<br>";
+}
+document.querySelector("#instructionsNew").innerHTML = instructionList;
+
+}
+
+function halfServingsChangeNew() {
+let ingredients = localStorage.getItem("List Of Ingredients");
+let parsedIngredients = JSON.parse(ingredients);
+
+let i;
+let ingredientList = "";
+for (i=0; i<parseInt(parsedIngredients.length); i++) {
+ingredientList += (parsedIngredients[i].ingredientQuantity/2) + " " + parsedIngredients[i].ingredientUnitOfMeasure + " " + parsedIngredients[i].ingredientName + "<br>";
+}
+document.querySelector("#ingredientsNew").innerHTML = ingredientList;
+
+}
+
+function doubleServingsChangeNew() {
+let ingredients = localStorage.getItem("List Of Ingredients");
+let parsedIngredients = JSON.parse(ingredients);
+
+let i;
+let ingredientList = "";
+for (i=0; i<parseInt(parsedIngredients.length); i++) {
+ingredientList += (parsedIngredients[i].ingredientQuantity*2) + " " + parsedIngredients[i].ingredientUnitOfMeasure + " " + parsedIngredients[i].ingredientName + "<br>";
+}
+document.querySelector("#ingredientsNew").innerHTML = ingredientList;
+
+}
+
 
 let recipeOptions = ["Crockpot Chili"];
 
@@ -49,7 +328,20 @@ function readyJavaScript() {
   }
 }
 
+var acc = document.getElementsByClassName("accordion");
+var i;
 
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
 
 function infoFunctionChili() {
   let listOfInfo = {
@@ -204,7 +496,7 @@ function addFieldsIngredients(){
                container.appendChild(document.createTextNode("Ingredient " + (i+1)));
                var amount = document.createElement("input");
                amount.type = "number";
-               amount.placeholder = "2";
+               amount.placeholder = "x";
                amount.id = "ingredientAmount" + (i+1);
 
                var measure = document.createElement("input");
@@ -321,11 +613,6 @@ function infoFunctionNew() {
   localStorage.setItem("recipeName", recipeName);
 
   let finalRecipeName = localStorage.getItem("recipeName");
- 
-  let recipeImage = document.getElementById("recipeImage").value;
-  localStorage.setItem("recipeImage", recipeImage);
-
-  let finalRecipeImage = localStorage.getItem("recipeImage");
 
   let recipeServes = document.getElementById("servings").value;
   localStorage.setItem("recipeServes", recipeServes);
@@ -382,7 +669,6 @@ recipeOptionValues.push(newRecipe);
 
 let listOfInfo = {
   recipeName: finalRecipeName,
-  recipeImage: finalRecipeImage,
   recipeServes: finalRecipeServes,
   recipePrepNum: finalRecipePrepTimeNumber,
   recipePrepMeasure: finalRecipePrepTimeMeasure,
@@ -508,11 +794,4 @@ function doubleServingsChangeNew() {
     }
     document.querySelector("#ingredientsNew").innerHTML = ingredientList;
 
-}
-
-function upload() {
-  let imgcanvas=document.getElementById("can");
-  let fileinput = document.getElementById("recipeImage");
-  let image = new SimpleImage(fileinput);
-  image.drawTo(imgcanvas);
 }

@@ -59,8 +59,12 @@
     }
 
     li, p, h1, h3 {
-        color: green;
+        color:limegreen;
         font-size: larger;
+    }
+
+    a:visited {
+        color: limegreen;
     }
     </style>
 </head>
