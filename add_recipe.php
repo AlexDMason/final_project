@@ -6,7 +6,8 @@ $eventNameMsg = "";
 
 
 if(isset($_POST['submit'])){
-    echo "<h1> Process the form, it has been submitted, ";
+    echo "<h1> Please input header<br>";
+    
 
 
     $inEventName = $_POST['header'];
@@ -79,7 +80,8 @@ label, input {
 
 body {
     text-align: center;
-    background-color: aliceblue;
+    background: rgb(223,123,41);
+background: radial-gradient(circle, rgba(223,123,41,1) 76%, rgba(255,209,0,1) 100%);
 }
 
         .eventBox {
@@ -207,6 +209,7 @@ if($confirmMessage){
   <div class="confirmMessage">
   <h2>Thank you, your information has been inputted</h2>
 </div>
+
 <?php
 }
 else{
@@ -235,6 +238,23 @@ else{
 </form>
 <li><a href="recipe_manager.php">Recipe Manager</a></li>
 </body>
+<script>
+  function onSubmit(token) {
+    document.getElementById("button").submit();
+    g-recaptcha-response
+  }
+  
+function onClick(e) {
+  e.preventDefault();
+  grecaptcha.enterprise.ready(async () => {
+    const token = await grecaptcha.enterprise.execute('6LfiwqsoAAAAAKi_EXfv4d6tGatz-IFfZifA9Zs5', {action: 'LOGIN'});
+    // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
+    // reCAPTCHA Enterprise to the end user's browser.
+    // This token must be validated by creating an assessment.
+    // See https://cloud.google.com/recaptcha-enterprise/docs/create-assessment
+  });
+}
+</script>
 
 </html>
 <?php

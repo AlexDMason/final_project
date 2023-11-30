@@ -52,7 +52,8 @@
 
 body {
   text-align: center;
-  background-color: rgb(226, 193, 121);
+  background: rgb(223,123,41);
+background: radial-gradient(circle, rgba(223,123,41,1) 76%, rgba(255,209,0,1) 100%);
 }
 
 header {

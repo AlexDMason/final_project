@@ -30,6 +30,9 @@
         .flex-container {
             display: flex;
             background-color:coral;
+            border-color: black;
+            border-style: solid;
+            border-radius: 1cm;
             }
 
 .flex-container > div {
@@ -41,7 +44,8 @@
 
 body {
   text-align: center;
-  background-color: rgb(226, 193, 121);
+  background: rgb(223,123,41);
+background: radial-gradient(circle, rgba(223,123,41,1) 76%, rgba(255,209,0,1) 100%);
 }
 
 header {
@@ -143,7 +147,7 @@ canvas {
         while($row = $stmt->fetch() ){ 
             echo "<div class='eventBox'>";
                 echo "<h3>";
-                    echo "Name:  ", $row["header"];
+                    echo "Name:  <br><br>", $row["header"];
                 echo "</h3>";
                     echo "<b>Amount of Time:   </b>", $row["image"];
                 echo "</p>";
